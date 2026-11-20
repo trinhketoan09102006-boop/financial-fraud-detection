@@ -221,3 +221,39 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ========================================
+# Financial Fraud Detection Project
+# ========================================
+
+# Raw dataset
+/data/raw/*
+!/data/raw/.gitkeep
+
+# Processed dataset
+/data/processed/*
+!/data/processed/.gitkeep
+
+# Train / Validation / Test datasets
+/data/splits/*
+!/data/splits/.gitkeep
+
+# Trained model artifacts
+/artifacts/*
+!/artifacts/.gitkeep
+
+# Model files
+*.joblib
+*.pkl
+*.pickle
+*.onnx
+
+# Large prediction files
+/results/predictions/
+
+# Kaggle credentials
+kaggle.json
+
+# IDE
+.vscode/
+.idea/

@@ -1,1 +1,16 @@
-﻿# Add project dependencies here.
+﻿numpy
+pandas
+polars
+pyarrow
+scipy
+scikit-learn
+lightgbm
+imbalanced-learn
+matplotlib
+seaborn
+joblib
+pytest
+jupyter
+ipykernel
+pyyaml
+
