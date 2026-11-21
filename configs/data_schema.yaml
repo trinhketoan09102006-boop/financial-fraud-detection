@@ -1,0 +1,40 @@
+version: 1
+dataset: normalized_transaction
+grain: one row per transaction
+join_key: trans_num
+time_field: timestamp
+canonical_time_source: trans_date_trans_time
+timezone: "Source does not declare a timezone; canonical timestamps remain timezone-naive."
+required_fields: [trans_num, cc_num, timestamp, amt, category, merchant, is_fraud]
+fields:
+  trans_num: {type: string, nullable: false, role: id, model_feature: false, description: Unique transaction identifier; join key.}
+  cc_num: {type: string, nullable: false, role: entity_id, model_feature: false, description: Card identifier for causal history grouping.}
+  timestamp: {type: 'datetime64[ns]', nullable: false, role: event_time, model_feature: false, source: trans_date_trans_time, description: Canonical parsed source timestamp; timezone-naive.}
+  amt: {type: float64, nullable: false, role: input, model_feature: true, unit: source currency unspecified}
+  merchant: {type: string, nullable: false, role: input, model_feature: true}
+  category: {type: string, nullable: false, role: input, model_feature: true}
+  gender: {type: string, nullable: true, role: input, model_feature: false, description: Retained for analysis; not in baseline feature list.}
+  city: {type: string, nullable: true, role: input, model_feature: false}
+  state: {type: string, nullable: true, role: input, model_feature: false}
+  zip: {type: string, nullable: true, role: input, model_feature: false}
+  lat: {type: float64, nullable: true, role: input, model_feature: false}
+  long: {type: float64, nullable: true, role: input, model_feature: false}
+  city_pop: {type: int64, nullable: true, role: input, model_feature: false}
+  dob: {type: 'datetime64[ns]', nullable: true, role: source, model_feature: false}
+  job: {type: string, nullable: true, role: input, model_feature: false}
+  merch_lat: {type: float64, nullable: true, role: input, model_feature: false}
+  merch_long: {type: float64, nullable: true, role: input, model_feature: false}
+  is_fraud: {type: int8, nullable: false, role: target, model_feature: false, values: [0, 1]}
+  hour: {type: int8, nullable: false, role: derived, model_feature: true, source: timestamp}
+  day_of_week: {type: int8, nullable: false, role: derived, model_feature: true, values: [0, 6], monday_is_0: true}
+  month: {type: int8, nullable: false, role: derived, model_feature: true, values: [1, 12]}
+  is_weekend: {type: int8, nullable: false, role: derived, model_feature: true, values: [0, 1]}
+  age_at_transaction: {type: float32, nullable: true, role: derived, model_feature: true, unit: years}
+  merchant_distance_km: {type: float32, nullable: true, role: derived, model_feature: true, description: Straight-line great-circle distance; not actual travel distance.}
+  source_dataset: {type: string, nullable: false, role: metadata, model_feature: false, values: [fraudTrain, fraudTest]}
+excluded_source_fields:
+  - {name: unix_time, reason: Source epoch time is exactly seven calendar years behind trans_date_trans_time; kept only in raw CSVs and audit diagnostics.}
+  - {name: first, reason: Direct identity field.}
+  - {name: last, reason: Direct identity field.}
+  - {name: street, reason: Direct address field.}
+  - {name: 'Unnamed: 0', reason: Redundant source row index.}

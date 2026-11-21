@@ -1,0 +1,493 @@
+job,transactions,fraud,fraud_rate
+Dancer,19,19,1.0
+Careers adviser,15,15,1.0
+Sales promotion account executive,14,14,1.0
+"Engineer, site",12,12,1.0
+Legal secretary,12,12,1.0
+Personnel officer,12,12,1.0
+"Accountant, chartered",11,11,1.0
+Homeopath,11,11,1.0
+Industrial buyer,10,10,1.0
+Broadcast journalist,9,9,1.0
+Forest/woodland manager,9,9,1.0
+Air traffic controller,8,8,1.0
+Armed forces technical officer,8,8,1.0
+Information officer,8,8,1.0
+Veterinary surgeon,8,8,1.0
+Contracting civil engineer,7,7,1.0
+Ship broker,7,7,1.0
+Lawyer,437,28,0.06407322654462243
+TEFL teacher,432,22,0.05092592592592592
+Community development worker,441,22,0.049886621315192746
+Clinical cytogeneticist,409,18,0.044009779951100246
+"Geneticist, molecular",428,16,0.037383177570093455
+Magazine journalist,419,14,0.03341288782816229
+Field trials officer,402,13,0.03233830845771144
+Civil Service administrator,401,12,0.029925187032418952
+Medical technical officer,860,25,0.029069767441860465
+Charity officer,420,12,0.02857142857142857
+"Engineer, structural",406,11,0.027093596059113302
+Interior and spatial designer,416,11,0.026442307692307692
+"Solicitor, Scotland",423,11,0.026004728132387706
+Marketing executive,394,10,0.025380710659898477
+"Education officer, community",400,10,0.025
+Air cabin crew,410,10,0.024390243902439025
+Chief of Staff,825,20,0.024242424242424242
+"Teacher, adult education",419,10,0.02386634844868735
+Hotel manager,411,9,0.021897810218978103
+English as a foreign language teacher,412,9,0.021844660194174758
+"Restaurant manager, fast food",420,9,0.02142857142857143
+Primary school teacher,424,9,0.02122641509433962
+Occupational therapist,428,9,0.02102803738317757
+"Accountant, chartered certified",433,9,0.020785219399538105
+"Producer, television/film/video",397,8,0.020151133501259445
+Copy,408,8,0.0196078431372549
+"Presenter, broadcasting",820,16,0.01951219512195122
+"Designer, multimedia",821,16,0.0194884287454324
+Textile designer,416,8,0.019230769230769232
+Catering manager,417,8,0.019184652278177457
+"Engineer, manufacturing",418,8,0.019138755980861243
+Broadcast engineer,423,8,0.018912529550827423
+Jewellery designer,814,15,0.018427518427518427
+Oncologist,435,8,0.01839080459770115
+"Production assistant, television",435,8,0.01839080459770115
+Sales executive,1250,22,0.0176
+Water quality scientist,403,7,0.017369727047146403
+Environmental manager,407,7,0.0171990171990172
+"Administrator, arts",408,7,0.01715686274509804
+"Engineer, materials",421,7,0.0166270783847981
+Horticultural consultant,425,7,0.01647058823529412
+Politician's assistant,1646,27,0.016403402187120292
+Medical secretary,1613,26,0.016119032858028518
+"Conservation officer, historic buildings",1149,18,0.015665796344647518
+Museum education officer,839,13,0.015494636471990465
+Set designer,1245,19,0.015261044176706828
+Theatre director,1248,19,0.015224358974358974
+"Engineer, aeronautical",813,12,0.014760147601476014
+"Teacher, English as a foreign language",813,12,0.014760147601476014
+Economist,824,12,0.014563106796116505
+Community pharmacist,1239,18,0.014527845036319613
+Emergency planning/management officer,1242,18,0.014492753623188406
+Chartered accountant,1176,17,0.01445578231292517
+Hospital pharmacist,834,12,0.014388489208633094
+"Designer, interior/spatial",1253,18,0.014365522745411013
+Geochemist,2028,29,0.014299802761341223
+"Merchandiser, retail",420,6,0.014285714285714285
+Hydrographic surveyor,848,12,0.014150943396226415
+Private music teacher,2899,41,0.014142807864780959
+Field seismologist,1214,17,0.01400329489291598
+Glass blower/designer,1644,23,0.013990267639902677
+Environmental education officer,861,12,0.013937282229965157
+General practice doctor,1604,22,0.01371571072319202
+Freight forwarder,2368,31,0.013091216216216216
+Public affairs consultant,1608,21,0.013059701492537313
+Academic librarian,845,11,0.01301775147928994
+"Scientist, physiological",1649,21,0.012734990903577926
+Chief Technology Officer,2048,26,0.0126953125
+Education administrator,797,10,0.012547051442910916
+"Psychologist, sport and exercise",1676,21,0.012529832935560859
+Animal nutritionist,1677,21,0.012522361359570662
+Art gallery manager,808,10,0.012376237623762377
+Furniture designer,1622,20,0.012330456226880395
+Hospital doctor,2850,35,0.012280701754385965
+"Loss adjuster, chartered",816,10,0.012254901960784314
+Pathologist,817,10,0.012239902080783354
+"Programmer, applications",817,10,0.012239902080783354
+Police officer,2047,25,0.012212994626282364
+"Editor, film/video",1639,20,0.012202562538133009
+Diagnostic radiographer,1233,15,0.012165450121654502
+Charity fundraiser,1650,20,0.012121212121212121
+Barrister's clerk,2499,30,0.012004801920768308
+Pharmacologist,1254,15,0.011961722488038277
+"Investment banker, corporate",1595,19,0.011912225705329153
+Special effects artist,1263,15,0.011876484560570071
+Air broker,842,10,0.011876484560570071
+"Engineer, building services",848,10,0.01179245283018868
+Retail buyer,1701,20,0.011757789535567314
+"Engineer, maintenance",1192,14,0.01174496644295302
+Maintenance engineer,2056,24,0.011673151750972763
+Plant breeder/geneticist,858,10,0.011655011655011656
+Aeronautical engineer,1219,14,0.011484823625922888
+Armed forces training and education officer,2032,23,0.011318897637795276
+Training and development officer,1240,14,0.01129032258064516
+"Surveyor, mining",1241,14,0.011281224818694601
+Building control surveyor,2045,23,0.011246943765281174
+Senior tax professional/tax inspector,3295,37,0.011229135053110774
+"Engineer, petroleum",2053,23,0.011203117389186557
+Television/film/video producer,3311,37,0.01117487163998792
+"Psychologist, clinical",1264,14,0.011075949367088608
+Curator,3258,36,0.011049723756906077
+"Designer, textile",823,9,0.010935601458080195
+Sports administrator,825,9,0.01090909090909091
+Insurance claims handler,833,9,0.010804321728691477
+Company secretary,834,9,0.01079136690647482
+Chartered legal executive (England and Wales),835,9,0.010778443113772455
+"Production assistant, radio",836,9,0.01076555023923445
+Neurosurgeon,1691,18,0.010644589000591367
+"Pharmacist, hospital",853,9,0.010550996483001172
+"Producer, radio",2473,26,0.010513546300040437
+Information systems manager,1636,17,0.01039119804400978
+Commercial horticulturist,2446,25,0.010220768601798855
+Advertising account executive,1286,13,0.01010886469673406
+Professor Emeritus,399,4,0.010025062656641603
+"Administrator, local government",2098,21,0.010009532888465206
+Patent attorney,2012,20,0.009940357852882704
+Trading standards officer,3733,37,0.00991159924993303
+Futures trader,3335,33,0.009895052473763119
+IT consultant,813,8,0.00984009840098401
+Farm manager,1629,16,0.009821976672805401
+Systems analyst,2852,28,0.009817671809256662
+Fitness centre manager,2045,20,0.009779951100244499
+Scientific laboratory technician,1637,16,0.009773976786805132
+Advertising copywriter,820,8,0.00975609756097561
+"Scientist, biomedical",3282,32,0.009750152346130409
+Nutritional therapist,1641,16,0.009750152346130409
+Network engineer,1233,12,0.009732360097323601
+Civil Service fast streamer,822,8,0.009732360097323601
+Retail manager,826,8,0.009685230024213076
+Research scientist (medical),827,8,0.009673518742442563
+Risk analyst,2081,20,0.009610764055742432
+Local government officer,422,4,0.009478672985781991
+Financial trader,4544,43,0.009463028169014084
+"Engineer, mining",2894,27,0.009329647546648237
+Industrial/product designer,1715,16,0.009329446064139942
+"Geologist, engineering",2484,23,0.009259259259259259
+Arboriculturist,2497,23,0.0092110532639167
+Broadcast presenter,2934,27,0.009202453987730062
+Mechanical engineer,4468,41,0.009176365264100268
+Public librarian,1212,11,0.009075907590759076
+Rural practice surveyor,1222,11,0.00900163666121113
+"Therapist, horticultural",2007,18,0.008968609865470852
+Records manager,1232,11,0.008928571428571428
+Sports development officer,1687,15,0.00889152341434499
+Research scientist (maths),1243,11,0.008849557522123894
+Careers information officer,2264,20,0.0088339222614841
+Web designer,2040,18,0.008823529411764706
+Biomedical scientist,2501,22,0.008796481407437025
+Orthoptist,1254,11,0.008771929824561403
+Television floor manager,2519,22,0.008733624454148471
+Event organiser,1263,11,0.00870942201108472
+"Chemist, analytical",809,7,0.00865265760197775
+"Embryologist, clinical",1272,11,0.008647798742138365
+"Radiographer, diagnostic",2440,21,0.00860655737704918
+"Pilot, airline",3286,28,0.00852099817407182
+Secretary/administrator,1648,14,0.00849514563106796
+Cabin crew,825,7,0.008484848484848486
+"Biochemist, clinical",836,7,0.008373205741626795
+"Lecturer, further education",2887,24,0.008313127814340146
+Commercial/residential surveyor,2327,19,0.008165019338203695
+Prison officer,4537,37,0.008155168613621335
+"Therapist, music",1227,10,0.008149959250203748
+Soil scientist,2086,17,0.008149568552253116
+Theme park manager,1597,13,0.008140262993112084
+Music tutor,2469,20,0.008100445524503848
+"Research officer, political party",2873,23,0.008005569091541943
+Horticultural therapist,1638,13,0.007936507936507936
+Acupuncturist,1266,10,0.007898894154818325
+Waste management officer,2027,16,0.007893438579181056
+Regulatory affairs officer,2457,19,0.007733007733007733
+Learning disability nurse,2847,22,0.007727432384966632
+"Lecturer, higher education",2340,18,0.007692307692307693
+Race relations officer,3683,28,0.007602497963616617
+Exercise physiologist,2899,22,0.0075888237323214905
+Materials engineer,6628,50,0.007543753771876886
+Hydrologist,1206,9,0.007462686567164179
+Management consultant,1215,9,0.007407407407407408
+Mental health nurse,2027,15,0.00740009866798224
+Location manager,1217,9,0.007395234182415777
+Fine artist,3667,27,0.007362967002999727
+"Administrator, education",2044,15,0.007338551859099804
+Communications engineer,1639,12,0.007321537522879805
+Higher education careers adviser,1230,9,0.007317073170731708
+"Nurse, mental health",820,6,0.007317073170731708
+"Psychotherapist, child",4379,32,0.007307604475907742
+"Education officer, museum",2466,18,0.0072992700729927005
+Museum/gallery conservator,1645,12,0.00729483282674772
+Equality and diversity officer,2059,15,0.007285089849441476
+Energy engineer,4537,33,0.00727352876350011
+Fisheries officer,2892,21,0.007261410788381743
+Sport and exercise psychologist,1670,12,0.00718562874251497
+Drilling engineer,4178,30,0.007180469123982767
+"Surveyor, land/geomatics",6969,50,0.007174630506528914
+Retail merchandiser,2930,21,0.007167235494880546
+"Nurse, children's",2094,15,0.0071633237822349575
+Ambulance person,843,6,0.0071174377224199285
+"Engineer, agricultural",1265,9,0.0071146245059288534
+Early years teacher,4519,32,0.007081212657667626
+Barista,1296,9,0.006944444444444444
+"Surveyor, minerals",3622,25,0.006902263942573164
+Occupational psychologist,3253,22,0.006762988011066708
+Music therapist,2076,14,0.00674373795761079
+Immigration officer,1637,11,0.006719609040928528
+Health and safety adviser,2085,14,0.00671462829736211
+"Designer, industrial/product",3286,22,0.006695069993913573
+Cartographer,1646,11,0.006682867557715674
+Audiological scientist,4947,33,0.0066707095209217705
+Clinical biochemist,1654,11,0.006650544135429262
+Architect,1668,11,0.006594724220623501
+Psychiatrist,1670,11,0.006586826347305389
+Garment/textile technologist,1223,8,0.006541291905151268
+Insurance risk surveyor,2935,19,0.006473594548551959
+Lexicographer,3247,21,0.006467508469356329
+Mudlogger,1239,8,0.00645682001614205
+"Journalist, newspaper",2489,16,0.0064282844515869825
+Armed forces logistics/support/administrative officer,1251,8,0.006394884092725819
+"Teacher, special educational needs",3637,23,0.006323893318669233
+Human resources officer,2059,13,0.006313744536182613
+Magazine features editor,5272,33,0.00625948406676783
+Chief Operating Officer,2411,15,0.006221484861053505
+"Civil engineer, contracting",1623,10,0.0061614294516327784
+Clinical research associate,1639,10,0.006101281269066504
+"Scientist, marine",4098,25,0.0061005368472425575
+Public relations account executive,3158,19,0.006016466117796073
+Exhibition designer,7316,44,0.006014215418261345
+Tax adviser,2013,12,0.005961251862891207
+"Engineer, production",3716,22,0.005920344456404736
+Building surveyor,4940,29,0.005870445344129555
+Engineering geologist,3238,19,0.00586781964175417
+"Doctor, hospital",2052,12,0.005847953216374269
+"Development worker, international aid",2424,14,0.005775577557755775
+"Teacher, early years/pre",1911,11,0.0057561486132914706
+Warden/ranger,2441,14,0.005735354362965997
+"Buyer, industrial",3315,19,0.005731523378582202
+"Scientist, research (maths)",4939,28,0.005669163798339745
+Leisure centre manager,2481,14,0.005642885933091495
+Accounting technician,3731,21,0.005628517823639775
+"Pharmacist, community",1620,9,0.005555555555555556
+Medical physicist,1263,7,0.0055423594615993665
+"Sales professional, IT",4348,24,0.005519779208831647
+Logistics and distribution manager,1276,7,0.0054858934169279
+Naval architect,6933,38,0.005481032741958748
+Probation officer,3286,18,0.005477784540474742
+"Engineer, electronics",2931,16,0.005458887751620608
+Chemical engineer,4032,22,0.005456349206349206
+Product designer,2028,11,0.005424063116370809
+Counselling psychologist,3690,20,0.005420054200542005
+Dealer,3733,20,0.005357621216180016
+Electrical engineer,4125,22,0.005333333333333333
+Health service manager,2063,11,0.005332040717401842
+Landscape architect,1690,9,0.0053254437869822485
+Mining engineer,4901,26,0.005305039787798408
+Call centre manager,2854,15,0.005255781359495445
+"Librarian, academic",4188,22,0.0052531041069723014
+Chief Executive Officer,5711,30,0.005253020486779898
+Further education lecturer,3253,17,0.00522594528127882
+Phytotherapist,2502,13,0.005195843325339729
+Metallurgist,2514,13,0.005171042163882259
+Multimedia programmer,3700,19,0.005135135135135135
+Immunologist,4876,25,0.005127153404429861
+Surgeon,3317,17,0.0051251130539644255
+"Scientist, audiological",5687,29,0.005099349393353262
+Paramedic,5371,27,0.005026996834853845
+Volunteer coordinator,1595,8,0.005015673981191223
+Illustrator,1205,6,0.004979253112033195
+"Research officer, trade union",2818,14,0.0049680624556423
+"Therapist, drama",1616,8,0.0049504950495049506
+Bookseller,2021,10,0.004948045522018802
+Arts development officer,1617,8,0.004947433518862091
+Podiatrist,5262,26,0.0049410870391486126
+Investment analyst,2030,10,0.0049261083743842365
+Travel agency manager,2863,14,0.004889975550122249
+Advice worker,2059,10,0.0048567265662943174
+Product/process development scientist,2472,12,0.0048543689320388345
+Museum/gallery exhibitions officer,1649,8,0.004851425106124924
+Paediatric nurse,2062,10,0.004849660523763337
+"Editor, magazine features",1650,8,0.0048484848484848485
+Research scientist (life sciences),1655,8,0.004833836858006042
+Operational researcher,2072,10,0.004826254826254826
+Secondary school teacher,4452,21,0.0047169811320754715
+Television production assistant,4035,19,0.004708798017348203
+Geoscientist,4473,21,0.004694835680751174
+IT trainer,6178,29,0.0046940757526707675
+Archaeologist,3227,15,0.004648280136349551
+Historic buildings inspector/conservation officer,4990,23,0.004609218436873747
+Land/geomatics surveyor,4451,20,0.004493372275893057
+Electronics engineer,2467,11,0.0044588569112282124
+"Engineer, automotive",4509,20,0.004435573297848747
+Site engineer,2482,11,0.004431909750201451
+"Teacher, secondary school",2034,9,0.004424778761061947
+Wellsite geologist,2044,9,0.004403131115459882
+"Engineer, control and instrumentation",3641,16,0.004394397143641857
+"Accountant, chartered public finance",2053,9,0.00438382854359474
+"Doctor, general practice",2057,9,0.004375303840544483
+Land,2057,9,0.004375303840544483
+Aid worker,1606,7,0.0043586550435865505
+"Geologist, wellsite",1629,7,0.004297114794352364
+"Programme researcher, broadcasting/film/video",3310,14,0.004229607250755287
+Musician,4966,21,0.004228755537656061
+Psychotherapist,1658,7,0.004221954161640531
+Transport planner,1685,7,0.004154302670623145
+Science writer,4138,17,0.004108264862252296
+Forensic psychologist,2940,12,0.004081632653061225
+Comptroller,5427,22,0.004053805048829924
+Theatre manager,1244,5,0.0040192926045016075
+Tree surgeon,2499,10,0.004001600640256103
+"Therapist, art",2027,8,0.003946719289590528
+Ceramics designer,3573,14,0.003918275958578225
+"Psychologist, forensic",4350,17,0.003908045977011494
+Chief Financial Officer,2048,8,0.00390625
+"Optician, dispensing",2054,8,0.0038948393378773127
+Film/video editor,7862,30,0.003815822945815314
+Gaffer,2361,9,0.0038119440914866584
+"Radiographer, therapeutic",3267,12,0.0036730945821854912
+Trade mark attorney,4091,15,0.0036665851869958446
+Production manager,2482,9,0.0036261079774375505
+Environmental consultant,6075,22,0.0036213991769547325
+Chief Marketing Officer,1659,6,0.003616636528028933
+Applications developer,3320,12,0.0036144578313253013
+Chartered public finance accountant,5836,21,0.0035983550376970526
+Airline pilot,1686,6,0.0035587188612099642
+Clothing/textile technologist,4794,17,0.0035460992907801418
+Physiotherapist,3670,13,0.003542234332425068
+Heritage manager,2843,10,0.0035174111853675696
+"Physicist, medical",2850,10,0.0035087719298245615
+Chiropodist,2873,10,0.003480682213713888
+Pensions consultant,4321,15,0.0034714186530895625
+Press photographer,3182,11,0.0034569453174104338
+Research scientist (physical sciences),4223,14,0.0033151787828557895
+"Engineer, land",2416,8,0.0033112582781456954
+Educational psychologist,3628,12,0.0033076074972436605
+Town planner,3338,11,0.0032953864589574597
+Claims inspector/assessor,4558,15,0.003290917068889864
+Tax inspector,2448,8,0.0032679738562091504
+Radio producer,3691,12,0.003251151449471688
+Tourist information centre manager,2470,8,0.0032388663967611335
+Occupational hygienist,2476,8,0.0032310177705977385
+Interpreter,1238,4,0.0032310177705977385
+Petroleum engineer,4532,14,0.003089143865842895
+"Librarian, public",4910,15,0.003054989816700611
+"Exhibitions officer, museum/gallery",3311,10,0.0030202355783751134
+"Engineer, biomedical",4130,12,0.0029055690072639223
+Barrister,4910,14,0.0028513238289205704
+Video editor,2463,7,0.0028420625253755584
+"Development worker, community",3194,9,0.002817783343769568
+"Designer, jewellery",2502,7,0.002797761790567546
+Special educational needs teacher,4071,11,0.002702038811102923
+Sub,5386,14,0.0025993316004456
+Corporate investment banker,1605,4,0.0024922118380062306
+Financial adviser,6095,15,0.002461033634126333
+Manufacturing engineer,2443,6,0.0024559967253376994
+"Administrator, charities/voluntary organisations",2039,5,0.0024521824423737125
+Radio broadcast assistant,3679,9,0.002446316933949443
+Insurance underwriter,4140,10,0.0024154589371980675
+Dispensing optician,2898,7,0.0024154589371980675
+Pension scheme manager,1677,4,0.002385211687537269
+Advertising account planner,3355,8,0.002384500745156483
+Agricultural consultant,5317,12,0.002256911792364115
+Facilities manager,3146,7,0.0022250476795931343
+Quantity surveyor,4532,10,0.002206531332744925
+Social researcher,3682,8,0.0021727322107550242
+Herbalist,3231,7,0.002166511915815537
+Child psychotherapist,3265,7,0.0021439509954058193
+Systems developer,6216,13,0.0020913770913770914
+"Psychologist, counselling",2872,6,0.0020891364902506965
+Counsellor,4468,9,0.0020143240823634737
+"Designer, ceramics/pottery",6587,12,0.0018217701533323211
+"Designer, exhibition/display",2432,4,0.001644736842105263
+Statistician,2096,3,0.0014312977099236641
+Make,4481,6,0.0013389868332961392
+Firefighter,4496,6,0.0013345195729537367
+Health physicist,2402,3,0.0012489592006661116
+"Copywriter, advertising",5732,7,0.0012212142358688067
+Cytogeneticist,4106,5,0.0012177301509985387
+Contractor,2452,2,0.0008156606851549756
+Chartered loss adjuster,4078,3,0.0007356547327121138
+English as a second language teacher,3306,2,0.0006049606775559589
+Water engineer,4947,0,0.0
+Medical sales representative,4098,0,0.0
+Toxicologist,3719,0,0.0
+Technical brewer,3717,0,0.0
+Chief Strategy Officer,3706,0,0.0
+"Therapist, occupational",3676,0,0.0
+"Editor, commissioning",2960,0,0.0
+Administrator,2938,0,0.0
+Structural engineer,2899,0,0.0
+Operations geologist,2872,0,0.0
+Insurance broker,2864,0,0.0
+Colour technologist,2811,0,0.0
+Amenity horticulturist,2802,0,0.0
+Licensed conveyancer,2464,0,0.0
+"Designer, furniture",2459,0,0.0
+Press sub,2443,0,0.0
+Camera operator,2407,0,0.0
+Energy manager,2275,0,0.0
+Tourism officer,2089,0,0.0
+Market researcher,2085,0,0.0
+Osteopath,2079,0,0.0
+Community arts worker,2077,0,0.0
+"Programmer, multimedia",2055,0,0.0
+"Therapist, sports",2031,0,0.0
+Intelligence analyst,2029,0,0.0
+Database administrator,2025,0,0.0
+"Surveyor, rural practice",2010,0,0.0
+Media buyer,2002,0,0.0
+Telecommunications researcher,1689,0,0.0
+Retail banker,1654,0,0.0
+Animal technologist,1649,0,0.0
+Community education officer,1647,0,0.0
+Seismic interpreter,1643,0,0.0
+"Scientist, research (physical sciences)",1642,0,0.0
+Dance movement psychotherapist,1633,0,0.0
+"Engineer, drilling",1627,0,0.0
+Biomedical engineer,1626,0,0.0
+Herpetologist,1624,0,0.0
+"Engineer, technical sales",1623,0,0.0
+Health promotion specialist,1618,0,0.0
+Art therapist,1613,0,0.0
+"Horticulturist, commercial",1597,0,0.0
+Health visitor,1596,0,0.0
+Public house manager,1595,0,0.0
+Animator,1273,0,0.0
+Planning and development surveyor,1258,0,0.0
+Oceanographer,1253,0,0.0
+Building services engineer,1244,0,0.0
+Psychiatric nurse,1244,0,0.0
+Archivist,1234,0,0.0
+Learning mentor,1230,0,0.0
+"Social research officer, government",1229,0,0.0
+Physiological scientist,1228,0,0.0
+Equities trader,1224,0,0.0
+Environmental health practitioner,1222,0,0.0
+Commissioning editor,1220,0,0.0
+Optometrist,1218,0,0.0
+"Engineer, communications",1209,0,0.0
+Control and instrumentation engineer,1208,0,0.0
+Production engineer,1208,0,0.0
+"Engineer, civil (contracting)",1197,0,0.0
+Quarry manager,1197,0,0.0
+Teaching laboratory technician,1187,0,0.0
+Geophysicist/field seismologist,1184,0,0.0
+"Teacher, primary school",1171,0,0.0
+"Engineer, broadcasting (operations)",844,0,0.0
+Stage manager,838,0,0.0
+"Scientist, clinical (histocompatibility and immunogenetics)",836,0,0.0
+Media planner,833,0,0.0
+Furniture conservator/restorer,830,0,0.0
+Architectural technologist,829,0,0.0
+Ecologist,821,0,0.0
+Visual merchandiser,805,0,0.0
+Outdoor activities/education manager,803,0,0.0
+Clinical psychologist,802,0,0.0
+Product manager,802,0,0.0
+"Scientist, research (medical)",796,0,0.0
+Manufacturing systems engineer,773,0,0.0
+"Conservator, furniture",443,0,0.0
+Estate manager/land agent,435,0,0.0
+"Engineer, civil (consulting)",426,0,0.0
+Minerals surveyor,426,0,0.0
+"Surveyor, hydrographic",421,0,0.0
+"Designer, television/film set",419,0,0.0
+Associate Professor,415,0,0.0
+Television camera operator,411,0,0.0
+Public relations officer,409,0,0.0
+"Buyer, retail",408,0,0.0
+"Investment banker, operational",405,0,0.0
+Artist,404,0,0.0
+Data scientist,404,0,0.0
+Tour manager,403,0,0.0
+Analytical chemist,398,0,0.0
+Nature conservation officer,394,0,0.0
+Purchasing manager,394,0,0.0
+"Conservator, museum/gallery",391,0,0.0
+Writer,388,0,0.0
+Hydrogeologist,379,0,0.0

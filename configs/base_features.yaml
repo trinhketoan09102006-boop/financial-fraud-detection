@@ -1,0 +1,10 @@
+version: 1
+feature_set: baseline_v1
+description: Transaction-local fields only; no card-history or rolling features.
+features:
+  numeric: [amt, hour, day_of_week, month, is_weekend, age_at_transaction, merchant_distance_km]
+  categorical: [merchant, category]
+excluded_fields: [trans_num, cc_num, is_fraud, timestamp, dob, unix_time, source_dataset, first, last, street]
+source_only_excluded_fields: [unix_time]
+fit_scope: Fit transformations and encoders using train only.
+allowed_history: None; behavioral history is owned by src/features and must be strictly past-only.

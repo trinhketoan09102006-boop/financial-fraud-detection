@@ -1,0 +1,353 @@
+{
+  "files": {
+    "fraudTrain.csv": {
+      "rows": 1296675,
+      "columns": [
+        "Unnamed: 0",
+        "trans_date_trans_time",
+        "cc_num",
+        "merchant",
+        "category",
+        "amt",
+        "first",
+        "last",
+        "gender",
+        "street",
+        "city",
+        "state",
+        "zip",
+        "lat",
+        "long",
+        "city_pop",
+        "job",
+        "dob",
+        "trans_num",
+        "unix_time",
+        "merch_lat",
+        "merch_long",
+        "is_fraud"
+      ],
+      "dtypes": {
+        "Unnamed: 0": "int64",
+        "trans_date_trans_time": "object",
+        "cc_num": "string",
+        "merchant": "object",
+        "category": "object",
+        "amt": "float64",
+        "first": "object",
+        "last": "object",
+        "gender": "object",
+        "street": "object",
+        "city": "object",
+        "state": "object",
+        "zip": "string",
+        "lat": "float64",
+        "long": "float64",
+        "city_pop": "int64",
+        "job": "object",
+        "dob": "object",
+        "trans_num": "string",
+        "unix_time": "int64",
+        "merch_lat": "float64",
+        "merch_long": "float64",
+        "is_fraud": "int64"
+      },
+      "missing": {
+        "Unnamed: 0": 0,
+        "trans_date_trans_time": 0,
+        "cc_num": 0,
+        "merchant": 0,
+        "category": 0,
+        "amt": 0,
+        "first": 0,
+        "last": 0,
+        "gender": 0,
+        "street": 0,
+        "city": 0,
+        "state": 0,
+        "zip": 0,
+        "lat": 0,
+        "long": 0,
+        "city_pop": 0,
+        "job": 0,
+        "dob": 0,
+        "trans_num": 0,
+        "unix_time": 0,
+        "merch_lat": 0,
+        "merch_long": 0,
+        "is_fraud": 0
+      },
+      "blank_strings": {},
+      "labels": {
+        "0": 1289169,
+        "1": 7506
+      },
+      "card_ids": null,
+      "fraud_card_ids": null,
+      "transaction_ids": null,
+      "duplicate_rows": 0,
+      "duplicate_transaction_ids": 0,
+      "invalid_transaction_ids": 0,
+      "invalid_card_numbers": 6111,
+      "invalid_labels": 0,
+      "invalid_timestamps": 0,
+      "timestamp_min": "2019-01-01T00:00:18",
+      "timestamp_max": "2020-06-21T12:13:37",
+      "timestamp_decreases": 1,
+      "same_timestamp_adjacent": 21852,
+      "negative_amounts": 0,
+      "zero_amounts": 0,
+      "invalid_amounts": 0,
+      "invalid_coordinates": 0,
+      "invalid_dob": 0,
+      "dob_after_transaction": 0,
+      "unix_time_mismatch_over_1s": 1296675,
+      "unix_offset_seconds": {
+        "220924800": 372364,
+        "220838400": 924311
+      },
+      "unix_timestamp_min_utc": "2012-01-01T00:00:18+00:00",
+      "unix_timestamp_max_utc": "2013-06-21T12:13:37+00:00",
+      "unix_timestamp_decreases": 0,
+      "unix_matches_timestamp_plus_7y": 1296675,
+      "time_fields_comparable_rows": 1296675,
+      "cardinality": {
+        "merchant": 693,
+        "category": 14,
+        "gender": 2,
+        "city": 894,
+        "state": 51,
+        "job": 494
+      },
+      "size_bytes": 351238196,
+      "sha256": "fd7139200dbfcbed0b6742bbe05a4f1abce532c4fef20918228a651647a3e75d",
+      "expected_rows": 1296675,
+      "row_count_matches_reference": true,
+      "unique_card_count": 976,
+      "fraud_card_count": 757
+    },
+    "fraudTest.csv": {
+      "rows": 555719,
+      "columns": [
+        "Unnamed: 0",
+        "trans_date_trans_time",
+        "cc_num",
+        "merchant",
+        "category",
+        "amt",
+        "first",
+        "last",
+        "gender",
+        "street",
+        "city",
+        "state",
+        "zip",
+        "lat",
+        "long",
+        "city_pop",
+        "job",
+        "dob",
+        "trans_num",
+        "unix_time",
+        "merch_lat",
+        "merch_long",
+        "is_fraud"
+      ],
+      "dtypes": {
+        "Unnamed: 0": "int64",
+        "trans_date_trans_time": "object",
+        "cc_num": "string",
+        "merchant": "object",
+        "category": "object",
+        "amt": "float64",
+        "first": "object",
+        "last": "object",
+        "gender": "object",
+        "street": "object",
+        "city": "object",
+        "state": "object",
+        "zip": "string",
+        "lat": "float64",
+        "long": "float64",
+        "city_pop": "int64",
+        "job": "object",
+        "dob": "object",
+        "trans_num": "string",
+        "unix_time": "int64",
+        "merch_lat": "float64",
+        "merch_long": "float64",
+        "is_fraud": "int64"
+      },
+      "missing": {
+        "Unnamed: 0": 0,
+        "trans_date_trans_time": 0,
+        "cc_num": 0,
+        "merchant": 0,
+        "category": 0,
+        "amt": 0,
+        "first": 0,
+        "last": 0,
+        "gender": 0,
+        "street": 0,
+        "city": 0,
+        "state": 0,
+        "zip": 0,
+        "lat": 0,
+        "long": 0,
+        "city_pop": 0,
+        "job": 0,
+        "dob": 0,
+        "trans_num": 0,
+        "unix_time": 0,
+        "merch_lat": 0,
+        "merch_long": 0,
+        "is_fraud": 0
+      },
+      "blank_strings": {},
+      "labels": {
+        "0": 553574,
+        "1": 2145
+      },
+      "card_ids": null,
+      "fraud_card_ids": null,
+      "transaction_ids": null,
+      "duplicate_rows": 0,
+      "duplicate_transaction_ids": 0,
+      "invalid_transaction_ids": 0,
+      "invalid_card_numbers": 2708,
+      "invalid_labels": 0,
+      "invalid_timestamps": 0,
+      "timestamp_min": "2020-06-21T12:14:25",
+      "timestamp_max": "2020-12-31T23:59:34",
+      "timestamp_decreases": 0,
+      "same_timestamp_adjacent": 10959,
+      "negative_amounts": 0,
+      "zero_amounts": 0,
+      "invalid_amounts": 0,
+      "invalid_coordinates": 0,
+      "invalid_dob": 0,
+      "dob_after_transaction": 0,
+      "unix_time_mismatch_over_1s": 555719,
+      "unix_offset_seconds": {
+        "220924800": 555719
+      },
+      "unix_timestamp_min_utc": "2013-06-21T12:14:25+00:00",
+      "unix_timestamp_max_utc": "2013-12-31T23:59:34+00:00",
+      "unix_timestamp_decreases": 0,
+      "unix_matches_timestamp_plus_7y": 555719,
+      "time_fields_comparable_rows": 555719,
+      "cardinality": {
+        "merchant": 693,
+        "category": 14,
+        "gender": 2,
+        "city": 849,
+        "state": 50,
+        "job": 478
+      },
+      "size_bytes": 150354339,
+      "sha256": "12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0",
+      "expected_rows": 555719,
+      "row_count_matches_reference": true,
+      "unique_card_count": 917,
+      "fraud_card_count": 216
+    }
+  },
+  "canonical_time_field": "trans_date_trans_time (parsed as timezone-naive timestamp)",
+  "comparison": {
+    "same_columns": true,
+    "columns_only_in_train": [],
+    "columns_only_in_test": [],
+    "shared_transaction_ids": 0,
+    "shared_cards": 901,
+    "strict_test_after_train": true
+  },
+  "findings": [
+    {
+      "status": "PASS",
+      "check": "schema_match",
+      "detail": "Both files have the same columns."
+    },
+    {
+      "status": "PASS",
+      "check": "reference_rows:fraudTrain.csv",
+      "detail": "Observed 1,296,675; reference 1,296,675."
+    },
+    {
+      "status": "PASS",
+      "check": "transaction_id_integrity:fraudTrain.csv",
+      "detail": "Duplicate IDs=0; missing/blank IDs=0."
+    },
+    {
+      "status": "PASS",
+      "check": "label_domain:fraudTrain.csv",
+      "detail": "Invalid/missing labels=0."
+    },
+    {
+      "status": "PASS",
+      "check": "timestamp_parse:fraudTrain.csv",
+      "detail": "Unparseable timestamps=0."
+    },
+    {
+      "status": "WARNING",
+      "check": "card_number_format:fraudTrain.csv",
+      "detail": "Missing, non-digit, or shorter than 12-digit identifiers=6,111; values are preserved as strings and not used as model inputs."
+    },
+    {
+      "status": "WARNING",
+      "check": "source_timestamp_order:fraudTrain.csv",
+      "detail": "Timestamp decreases in original row order=1; the preprocessor sorts by parsed timestamp."
+    },
+    {
+      "status": "PASS",
+      "check": "reference_rows:fraudTest.csv",
+      "detail": "Observed 555,719; reference 555,719."
+    },
+    {
+      "status": "PASS",
+      "check": "transaction_id_integrity:fraudTest.csv",
+      "detail": "Duplicate IDs=0; missing/blank IDs=0."
+    },
+    {
+      "status": "PASS",
+      "check": "label_domain:fraudTest.csv",
+      "detail": "Invalid/missing labels=0."
+    },
+    {
+      "status": "PASS",
+      "check": "timestamp_parse:fraudTest.csv",
+      "detail": "Unparseable timestamps=0."
+    },
+    {
+      "status": "WARNING",
+      "check": "card_number_format:fraudTest.csv",
+      "detail": "Missing, non-digit, or shorter than 12-digit identifiers=2,708; values are preserved as strings and not used as model inputs."
+    },
+    {
+      "status": "PASS",
+      "check": "source_timestamp_order:fraudTest.csv",
+      "detail": "Timestamp decreases in original row order=0; the preprocessor sorts by parsed timestamp."
+    },
+    {
+      "status": "PASS",
+      "check": "cross_file_transaction_ids",
+      "detail": "Shared transaction IDs=0."
+    },
+    {
+      "status": "PASS",
+      "check": "test_after_train",
+      "detail": "train max=2020-06-21T12:13:37; test min=2020-06-21T12:14:25; strict ordering=True."
+    },
+    {
+      "status": "WARNING",
+      "check": "UNIX_TIME_STALE_BY_7_CALENDAR_YEARS",
+      "code": "UNIX_TIME_STALE_BY_7_CALENDAR_YEARS",
+      "detail": "All 1,852,394 records reconstruct exactly when unix_time (seconds since epoch, interpreted UTC) is advanced by seven calendar years. Excluded from normalized data; raw CSVs remain unchanged. Offset seconds observed: 220,838,400 to 220,924,800."
+    },
+    {
+      "status": "PASS",
+      "check": "cross_file_card_overlap",
+      "detail": "Shared cards=901; card overlap alone is not leakage when prior history is used temporally."
+    }
+  ],
+  "privacy": "No card numbers, names, street addresses, or raw row values are included in this manifest or the report."
+}
