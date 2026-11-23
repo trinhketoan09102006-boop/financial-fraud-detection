@@ -1,14 +1,12 @@
 # Exploratory data analysis report
 
-The validated canonical time field is `trans_date_trans_time` parsed as timezone-naive `timestamp`. The raw `unix_time` field is exactly seven calendar years behind and is excluded from normalized/model inputs. All detailed EDA below uses the validated training split only.
-
 ## Scope and method
 
-Detailed exploratory analysis uses only the temporal training split (1,037,339 transactions; 964 cards). Validation and test are not used to choose features. This analysis describes associations and distributions; it does not establish causal relationships or model performance.
+Detailed exploratory analysis uses only the temporal training split (1,037,340 transactions; 964 cards). Validation and test are not used to choose features. This analysis describes associations and distributions; it does not establish causal relationships or model performance.
 
 ## Target and imbalance
 
-- Normal: 1,031,371; fraud: 5,968; fraud rate: 0.5753%.
+- Normal: 1,031,372; fraud: 5,968; fraud rate: 0.5753%.
 - The low fraud prevalence means accuracy alone can look high while missed fraud remains substantial. Compare precision-recall, recall, precision, and cost-aware metrics in Khoa's evaluation.
 
 ## Transaction amounts
@@ -17,7 +15,7 @@ See `numeric_summary.csv`, `03_amount_distribution.png`, `04_log_amount_distribu
 
 ## Categories and time
 
-Fraud rates include transaction and fraud counts in `fraud_rate_by_category.csv` to show uncertainty for small groups. Highest observed category rates in this training partition: `[{'category': 'shopping_net', 'transactions': 78025, 'fraud': 1370, 'fraud_rate': 0.01755847484780519}, {'category': 'misc_net', 'transactions': 50501, 'fraud': 737, 'fraud_rate': 0.014593770420387715}, {'category': 'grocery_pos', 'transactions': 98808, 'fraud': 1387, 'fraud_rate': 0.014037324912962513}, {'category': 'shopping_pos', 'transactions': 93330, 'fraud': 661, 'fraud_rate': 0.007082395799849994}, {'category': 'gas_transport', 'transactions': 105247, 'fraud': 493, 'fraud_rate': 0.00468421902762074}]`. Hour/day/month outputs are descriptive, based on timezone-naive source timestamps.
+Fraud rates include transaction and fraud counts in `fraud_rate_by_category.csv` to show uncertainty for small groups. Highest observed category rates in this training partition: `[{'category': 'shopping_net', 'transactions': 78025, 'fraud': 1370, 'fraud_rate': 0.01755847484780519}, {'category': 'misc_net', 'transactions': 50501, 'fraud': 737, 'fraud_rate': 0.014593770420387715}, {'category': 'grocery_pos', 'transactions': 98808, 'fraud': 1387, 'fraud_rate': 0.014037324912962513}, {'category': 'shopping_pos', 'transactions': 93330, 'fraud': 661, 'fraud_rate': 0.007082395799849994}, {'category': 'gas_transport', 'transactions': 105248, 'fraud': 493, 'fraud_rate': 0.004684174521131043}]`. Hour/day/month outputs are descriptive, based on timezone-naive source timestamps.
 
 ## Exploratory card-level summaries
 

@@ -2,7 +2,7 @@ import json
 
 import pandas as pd
 
-from src.data.audit import run_audit
+from src.data.audit import _datetime_epoch_seconds, run_audit
 
 
 def _source_frame(prefix, start, n=3):
@@ -44,3 +44,12 @@ def test_pipeline_stops_split_on_audit_blocker(monkeypatch):
         assert "BLOCKER" in str(error)
     else:
         raise AssertionError("split stage should stop when audit has a blocker")
+
+
+def test_datetime_epoch_conversion_is_resolution_independent():
+    base = pd.Timestamp("2020-01-01 00:00:00")
+    expected = [1577836800, 1577836861]
+    values = [base, base + pd.Timedelta(seconds=61)]
+    for unit in ("s", "ms", "us", "ns"):
+        series = pd.Series(pd.DatetimeIndex(values).as_unit(unit))
+        assert _datetime_epoch_seconds(series).tolist() == expected

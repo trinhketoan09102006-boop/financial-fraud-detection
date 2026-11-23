@@ -40,12 +40,24 @@ def generate_mock(output_dir: Path | None = None, rows_per_split: int = 100, see
                 "zip": None if i == 7 else f"{90000 + i:05d}", "lat": 37.7, "long": -122.4,
                 "city_pop": None if split == "validation" and i == 8 else 100_000,
                 "dob": pd.Timestamp("1980-01-01") + pd.Timedelta(days=i % 1000), "job": f"job_{i % 10}",
-                "unix_time": int(ts.timestamp()), "merch_lat": 37.8, "merch_long": -122.5,
+                "merch_lat": 37.8, "merch_long": -122.5,
                 "is_fraud": fraud, "hour": ts.hour, "day_of_week": ts.dayofweek, "month": ts.month,
                 "is_weekend": int(ts.dayofweek >= 5), "age_at_transaction": (ts - pd.Timestamp("1980-01-01")).days / 365.2425,
-                "merchant_distance_km": 14.17, "source_dataset": "mock",
+                "merchant_distance_km": 14.17,
+                "source_dataset": "fraudTest" if split == "test" else "fraudTrain",
             })
     transactions = pd.DataFrame(records).sort_values(["timestamp", "trans_num"], kind="mergesort", ignore_index=True)
+    for column in ("trans_num", "cc_num", "merchant", "category", "gender", "city", "state", "zip", "job", "source_dataset"):
+        transactions[column] = transactions[column].astype("string")
+    for column in ("timestamp", "dob"):
+        transactions[column] = pd.to_datetime(transactions[column]).astype("datetime64[ns]")
+    transactions["city_pop"] = transactions["city_pop"].astype("Int64")
+    for column in ("lat", "long", "amt", "merch_lat", "merch_long"):
+        transactions[column] = transactions[column].astype("float64")
+    for column in ("is_fraud", "hour", "day_of_week", "month", "is_weekend"):
+        transactions[column] = transactions[column].astype("int8")
+    for column in ("age_at_transaction", "merchant_distance_km"):
+        transactions[column] = transactions[column].astype("float32")
     manifest = transactions[["trans_num"]].copy()
     manifest["split"] = np.repeat(split_names, rows_per_split)
     manifest = manifest.sort_values("trans_num", kind="mergesort", ignore_index=True)
@@ -57,7 +69,7 @@ def generate_mock(output_dir: Path | None = None, rows_per_split: int = 100, see
 
 These {len(transactions)} rows are synthetic and generated with NumPy seed `{seed}`. They contain no records copied from the Sparkov CSVs and are for interface and pipeline tests only; they do not represent model performance.
 
-        `mock_transactions.csv` follows the normalized transaction schema. `mock_split_manifest.csv` maps each unique `trans_num` to one time-ordered split. The default fixture spans more than seven days per split for 1h/24h/7d history tests and includes both labels, tied timestamps, unseen cards, new merchants/categories, a large amount, and nullable fields.
+`mock_transactions.csv` follows the normalized transaction schema. `mock_split_manifest.csv` maps each unique `trans_num` to one time-ordered split. The default fixture spans more than seven days per split for 1h/24h/7d history tests and includes both labels, tied timestamps, unseen cards, new merchants/categories, a large amount, and nullable fields.
 """, encoding="utf-8")
     return transactions, manifest
 

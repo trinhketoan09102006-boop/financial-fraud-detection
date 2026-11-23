@@ -31,6 +31,12 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _datetime_epoch_seconds(values: pd.Series) -> pd.Series:
+    """Return Unix seconds independently of the datetime64 storage resolution."""
+    ns_values = values.dt.as_unit("ns").astype("int64")
+    return ns_values // 1_000_000_000
+
+
 def _new_stats() -> dict[str, Any]:
     return {
         "rows": 0,
@@ -168,9 +174,11 @@ def _update_file(path: Path, chunksize: int) -> dict[str, Any]:
 
         if "unix_time" in chunk and TIMESTAMP in chunk:
             unix = pd.to_numeric(chunk["unix_time"], errors="coerce")
-            parsed_ns = ts.astype("int64", copy=False)
+            # Pandas 3 infers datetime64[s/us/ms/ns] from input precision. Normalize
+            # before converting to integers; otherwise seconds can be mistaken for ns.
+            parsed_seconds = _datetime_epoch_seconds(ts)
             comparable = ts.notna() & unix.notna()
-            delta = parsed_ns[comparable] // 1_000_000_000 - unix[comparable]
+            delta = parsed_seconds[comparable] - unix[comparable]
             stats["unix_time_mismatch_over_1s"] += int((delta.abs() > 1).sum())
             stats["time_fields_comparable_rows"] += int(comparable.sum())
             stats["unix_offset_seconds"].update(delta.astype("int64").tolist())

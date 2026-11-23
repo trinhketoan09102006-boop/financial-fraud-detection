@@ -35,13 +35,17 @@ def normalize_frame(frame: pd.DataFrame, source: str) -> pd.DataFrame:
     data["cc_num"] = data["cc_num"].astype("string")
     data["trans_num"] = data["trans_num"].astype("string")
     data["zip"] = data["zip"].astype("string")
-    data["timestamp"] = pd.to_datetime(data["timestamp"], errors="raise")
-    data["dob"] = pd.to_datetime(data["dob"], errors="raise")
+    # The contract requires nanosecond Parquet timestamps. Pandas 3 infers the
+    # coarsest viable unit from strings, so make precision explicit here.
+    data["timestamp"] = pd.to_datetime(data["timestamp"], errors="raise").astype("datetime64[ns]")
+    data["dob"] = pd.to_datetime(data["dob"], errors="raise").astype("datetime64[ns]")
     data["amt"] = pd.to_numeric(data["amt"], errors="raise").astype("float64")
     data["is_fraud"] = pd.to_numeric(data["is_fraud"], errors="raise").astype("int8")
     data["city_pop"] = pd.to_numeric(data["city_pop"], errors="raise").astype("int64")
     for col in ("lat", "long", "merch_lat", "merch_long"):
         data[col] = pd.to_numeric(data[col], errors="raise").astype("float64")
+    for col in ("merchant", "category", "gender", "city", "state", "job"):
+        data[col] = data[col].astype("string")
 
     # All added fields use the transaction itself and are not customer-history features.
     data["hour"] = data["timestamp"].dt.hour.astype("int8")
@@ -50,7 +54,7 @@ def normalize_frame(frame: pd.DataFrame, source: str) -> pd.DataFrame:
     data["is_weekend"] = data["day_of_week"].isin([5, 6]).astype("int8")
     data["age_at_transaction"] = ((data["timestamp"] - data["dob"]).dt.total_seconds() / (365.2425 * 86400)).astype("float32")
     data["merchant_distance_km"] = _haversine_km(data["lat"], data["long"], data["merch_lat"], data["merch_long"]).astype("float32")
-    data["source_dataset"] = source
+    data["source_dataset"] = pd.Series(source, index=data.index, dtype="string")
     data = data.sort_values(["timestamp", "trans_num"], kind="mergesort", ignore_index=True)
     return data
 
