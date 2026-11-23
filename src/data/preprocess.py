@@ -8,6 +8,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 from .audit import RAW_FILES, ROOT, run_audit
 
@@ -15,6 +17,27 @@ from .audit import RAW_FILES, ROOT, run_audit
 DROP_COLUMNS = ("first", "last", "street", "Unnamed: 0", "unix_time")
 RENAME_COLUMNS = {"trans_date_trans_time": "timestamp"}
 REQUIRED = {"trans_num", "cc_num", "trans_date_trans_time", "amt", "merchant", "category", "is_fraud"}
+ARROW_STRING_COLUMNS = (
+    "trans_num", "cc_num", "merchant", "category", "gender", "city",
+    "state", "zip", "job", "source_dataset",
+)
+
+
+def _to_contract_arrow_table(frame: pd.DataFrame) -> pa.Table:
+    """Build a table with the contract's exact Arrow string type.
+
+    pandas/Arrow combinations can infer ``large_string`` for text columns.
+    Parquet output is normalized to Arrow ``string`` because that is the
+    published data contract, regardless of the incoming pandas string backend.
+    """
+    table = pa.Table.from_pandas(frame, preserve_index=False)
+    for name in ARROW_STRING_COLUMNS:
+        if name not in table.column_names:
+            continue
+        index = table.schema.get_field_index(name)
+        if table.schema.field(index).type != pa.string():
+            table = table.set_column(index, name, table.column(index).cast(pa.string()))
+    return table
 
 
 def _haversine_km(lat1: pd.Series, lon1: pd.Series, lat2: pd.Series, lon2: pd.Series) -> pd.Series:
@@ -82,7 +105,7 @@ def preprocess(raw_dir: Path | None = None, output: Path | None = None, force: b
     output.parent.mkdir(parents=True, exist_ok=True)
     temp = output.with_suffix(output.suffix + ".tmp")
     try:
-        result.to_parquet(temp, index=False, compression="zstd")
+        pq.write_table(_to_contract_arrow_table(result), temp, compression="zstd")
         temp.replace(output)
     finally:
         temp.unlink(missing_ok=True)

@@ -2,43 +2,55 @@
 
 ## Readiness
 
-`CONDITIONAL_READY` for local use. The full pipeline has regenerated current split artifacts in this worktree and tests pass against them. Processed and split Parquet files are ignored/untracked local artifacts; they are not part of the review diff or available to another machine. Recreate them from the raw inputs or transfer through an approved data channel.
+`CONDITIONAL_READY`. The full processed dataset and splits exist in this local `financial-fraud-detection` worktree and have been validated against the schema and split contract. They are ignored by Git and are not delivered to another machine through this code diff. Trung can use them from this same workspace, or recreate them using the instructions below after obtaining the raw inputs.
 
-Worktree root: `financial-fraud-detection-sprint1 worktree`
-Current split hash: `aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8`
-Policy: `nearest_row_count`
-Cutoff: `2020-03-06T07:16:43`
+## Canonical inputs
 
-| Input | Local path | SHA-256 |
-|---|---|---|
-| Normalized table | `data/processed/transactions.parquet` | `60efdcdbb59aa1e503fc8b2ddb023d3d0bc84d611d176ec8b71f7713ecb66e30` |
-| Train | `data/splits/train.parquet` | `aefcebfe4a8c07bd2ea9eaef3d65edc493244c3dd6dcaf4f5eb694aa9004bd55` |
-| Validation | `data/splits/validation.parquet` | `9feecd921fdaa08c876d8ea902af1072483ad45c68cb8152bddb65a92b56d4c7` |
-| Test | `data/splits/test.parquet` | `43f3b72e486d9b544fc4963f61d4b8d7ac4531507f81007f1ba554f16f854570` |
-| Split manifest | `data/splits/split_manifest.parquet` | `b8559100aaa195fe5ffe80d1a2c15360578c5ad456a7cdba5facd7eaaa0848bc` |
-| Split metadata | `data/splits/split_metadata.json` | `468b129fecf0dbff1557b1ac86e157639546427d3bc9df10f4084708dd0b4d3f` |
+| Input | Path from repository root | Rows | SHA-256 |
+|---|---|---:|---|
+| Normalized transactions | `data/processed/transactions.parquet` | 1,852,394 | `60efdcdbb59aa1e503fc8b2ddb023d3d0bc84d611d176ec8b71f7713ecb66e30` |
+| Train | `data/splits/train.parquet` | 1,037,340 | `aefcebfe4a8c07bd2ea9eaef3d65edc493244c3dd6dcaf4f5eb694aa9004bd55` |
+| Validation | `data/splits/validation.parquet` | 259,335 | `9feecd921fdaa08c876d8ea902af1072483ad45c68cb8152bddb65a92b56d4c7` |
+| Test | `data/splits/test.parquet` | 555,719 | `43f3b72e486d9b544fc4963f61d4b8d7ac4531507f81007f1ba554f16f854570` |
+| Split manifest | `data/splits/split_manifest.parquet` | 1,852,394 | `b8559100aaa195fe5ffe80d1a2c15360578c5ad456a7cdba5facd7eaaa0848bc` |
+| Split metadata | `data/splits/split_metadata.json` | n/a | `468b129fecf0dbff1557b1ac86e157639546427d3bc9df10f4084708dd0b4d3f` |
 
-## Interface and policy
+Current split policy is `nearest_row_count`; cutoff is `2020-03-06T07:16:43`; split hash is `aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8`. The hash is repeated in `configs/split.yaml`, `data/splits/split_metadata.json`, and this handoff. `trans_date_trans_time` is canonical; `unix_time` is excluded because it is seven calendar years stale.
 
-- Grain: one row per transaction; `trans_num` is a unique, non-null string join key.
-- `cc_num` is a preserved string used only to group card history; never pass it as a model feature.
-- `timestamp` is timezone-naive `timestamp[ns]`, parsed from `trans_date_trans_time`. Source timezone is unspecified; do not assign one without a documented decision.
-- `is_fraud` is the target and must not enter history features.
-- Split manifest fields: `trans_num`, `split`; it covers all 1,852,394 rows one-to-one.
-- Current rows: train 1,037,340; validation 259,335; test 555,719. Chronology is strict and equal timestamps remain in one split.
-- All feature/evaluation outputs must carry split hash `aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8`. Do not mix outputs built using the historical hash `70886bb39220a732c02d0fd1fe2568bdbcaee96d9e3434c73bd9477c02ebb255`.
-- Allowed history: same `cc_num`, event time strictly less than the anchor time. Treat events at an equal timestamp as a batch before updating state. History may cross from observed train into validation/test under the contract. Do not use labels in history.
-- Fit feature transforms/encoders on train only; validation/test remain unchanged.
+The normalized table has the exact 25-field contract schema. Text fields are Arrow `string`, not `large_string`; timestamps are timezone-naive `timestamp[ns]`. `trans_num` is unique/non-null. `cc_num` is preserved as a string. Raw SHA-256: train `fd7139200dbfcbed0b6742bbe05a4f1abce532c4fef20918228a651647a3e75d`; test `12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0`.
 
-## Recreate and validate
+Environment used for validation: Python 3.13.7, pandas 2.2.3, PyArrow 22.0.0, pytest 9.2.0.
 
-With the raw inputs at `data/raw/` and no stale generated outputs, run:
+## Recreate and validate locally
+
+From the repository root, with both raw LFS files available and no existing generated outputs:
 
 ```powershell
 python -m src.data.pipeline --stage all
 python -m pytest -q -rs
 ```
 
-Expected split hash is recorded in `configs/split.yaml` and `data/splits/split_metadata.json`. The local artifacts are ignored and should not be staged. Current raw checksums: train `fd7139200dbfcbed0b6742bbe05a4f1abce532c4fef20918228a651647a3e75d`; test `12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0`.
+Expected split policy/hash and counts are checked by the integration test and stored in `configs/split.yaml` plus `data/splits/split_metadata.json`. If generated outputs already exist, preserve/verify them first; the pipeline refuses to overwrite without `--force`. Do not use `--force` on shared work without a backup.
 
-Baseline model inputs are in `configs/base_features.yaml`. No history feature generation was implemented in Sprint 1. Sparkov is simulated, and currency/timezone are unspecified; do not interpret its results as production performance.
+To check the saved artifacts manually:
+
+```powershell
+python -c "import json; print(json.load(open('data/splits/split_metadata.json', encoding='utf-8'))['split_hash'])"
+Get-FileHash data/processed/transactions.parquet,data/splits/train.parquet,data/splits/validation.parquet,data/splits/test.parquet,data/splits/split_manifest.parquet -Algorithm SHA256
+```
+
+## Local artifact sync for Trung
+
+The Parquet files are local ignored artifacts; they are deliberately absent from Git. If Trung shares this same machine/workspace, read the listed paths directly. Otherwise, either obtain the two raw files through the approved data access route and run the two commands above in the same project revision, or transfer these generated Parquet files and `split_metadata.json` using an approved access-controlled data channel. Before feature work, compare each SHA-256, confirm the split hash, and keep raw/processed Parquet out of Git commits.
+
+## Feature Engineering contract
+
+1. `trans_num` is the one-to-one transaction join key; retain it on each output row.
+2. Keep `cc_num` as a string and use it only to group same-card history; never pass it as a model feature.
+3. For an anchor at `timestamp=t`, use only same-card records where `timestamp < t`.
+4. Treat equal-timestamp transactions as a batch; none may use another event in that batch as history.
+5. Observed prior train history may cross into validation/test under the data contract.
+6. Never use `is_fraud` to make history features. Fit encoders, imputers, and other transforms on train only.
+7. Do not assign a timezone or currency because the source does not specify them.
+
+No Feature Engineering implementation was performed; this is an input and leakage-policy handoff only.

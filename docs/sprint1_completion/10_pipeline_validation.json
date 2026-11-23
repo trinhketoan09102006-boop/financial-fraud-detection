@@ -1,0 +1,23 @@
+{
+  "schema_fields": 25,
+  "schema_mismatches": [],
+  "rows": {
+    "processed": 1852394,
+    "train": 1037340,
+    "validation": 259335,
+    "test": 555719
+  },
+  "split_hash": "aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8",
+  "cutoff_policy": "nearest_row_count",
+  "cutoff_timestamp": "2020-03-06T07:16:43",
+  "raw_sha256": {
+    "fraudTrain.csv": "fd7139200dbfcbed0b6742bbe05a4f1abce532c4fef20918228a651647a3e75d",
+    "fraudTest.csv": "12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0"
+  },
+  "processed_sha256": "60efdcdbb59aa1e503fc8b2ddb023d3d0bc84d611d176ec8b71f7713ecb66e30",
+  "id_unique": true,
+  "manifest_one_to_one": true,
+  "strict_chronology": true,
+  "timestamp_group_atomicity": true,
+  "timezone": "None"
+}
