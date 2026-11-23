@@ -4,43 +4,43 @@
 
 - **DATA_PIPELINE_READINESS: PASS** for local development and model input generation.
 - **MODEL_INPUT_READINESS: PASS** for the validated temporal splits and declared baseline feature contract.
-- **TEAM_HANDOFF_READINESS: CONDITIONAL** because the raw files remain tracked in Git LFS and the owner has not approved how to remove them from the current repository tip.
-- **GIT_SAFETY_READINESS: BLOCKER** for a clean handoff or merge until the team chooses a history-preserving untracking plan or an explicitly coordinated history rewrite.
-- **OVERALL: NO-GO for merge/team Git handoff; data can be used locally.**
+- **CURRENT_SPLIT: `aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8`** using `nearest_row_count`, cutoff `2020-03-06T07:16:43`.
+- **TEAM_HANDOFF_READINESS: CONDITIONAL** because GitHub remote state could not be fetched and generated Parquet artifacts remain local/ignored.
+- **GIT_SAFETY_READINESS: PASS for this local review state**; no commit, push, merge, or tracking change was made.
+- **OVERALL: CONDITIONAL_READY** for local review; publish/handoff requires review and a shared artifact path or reproducible access to raw data.
 
 ## Data checks
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Full source read | PASS | Both files were audited in full. |
+| Full source read | PASS | Both files audited in full. |
 | Source row counts | PASS | Train 1,296,675; test 555,719; total 1,852,394. |
 | Labels | PASS | Train 7,506 fraud; test 2,145 fraud; all labels are 0/1. |
 | Schema / IDs | PASS | Same 23 columns; no duplicate rows, duplicate/missing `trans_num`, or cross-file transaction ID overlap. |
-| Timestamp parsing | PASS | `trans_date_trans_time` parses for all rows; `fraudTest` begins after `fraudTrain`. Train has one source-order decrease, handled by sorting on timestamp. |
-| `unix_time` root cause | WARNING, resolved | It is epoch seconds; interpreting as UTC and adding seven calendar years reconstructs the text timestamp exactly for all 1,852,394 records. It is excluded from normalized/model data. Raw CSVs remain unchanged. Code: `UNIX_TIME_STALE_BY_7_CALENDAR_YEARS`. |
-| Missing / numeric / coordinate / DOB checks | PASS | No missing values, blank strings, invalid labels/timestamps, invalid amounts, invalid coordinates, or future DOBs observed. |
-| Card identifier lengths | WARNING | 6,111 train and 2,708 test IDs are 11-digit strings. Preserved exactly as strings for history grouping; never passed to a model. |
+| Canonical timestamp | PASS | `trans_date_trans_time`; all rows parse. Train has one source-order decrease, handled by timestamp sort. |
+| `unix_time` root cause | PASS | Epoch seconds plus seven calendar years reconstruct canonical time across all 1,852,394 rows; excluded from normalized/model data. |
+| Missing / numeric / coordinate / DOB checks | PASS | No missing values, invalid labels/timestamps, invalid amounts, invalid coordinates, or future DOBs. |
+| Card identifier lengths | WARNING | 6,111 train and 2,708 test IDs are 11-digit strings; preserved for grouping, excluded from model features. |
 | Processed table | PASS | 1,852,394 rows, 25 columns, unique `trans_num`, no `unix_time`, names, surname, or street fields. |
-| Temporal split | PASS | Train 1,037,339; validation 259,336; test 555,719; strict time order, no equal-timestamp group crosses a boundary, and transaction IDs are pairwise disjoint. |
-| Reproducibility | PASS | Split hash is unchanged from the earlier provisional artifact and recomputes from the regenerated manifest. |
-| EDA | PASS | Ten charts and aggregate outputs rerun on training split only. |
-| Contract / mock / tests | PASS | YAML contract validated; 300 synthetic rows span 1h/24h/7d windows; 8 pytest tests pass. |
-| Raw checksums | PASS | Both raw SHA-256 values match the full audit manifest after the rerun. |
+| Temporal split | PASS | Train 1,037,340; validation 259,335; test 555,719; cutoff `2020-03-06T07:16:43`; strict chronology, timestamp groups atomic, IDs disjoint. |
+| Split hash | PASS | `aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8`; matches generated metadata and regression expectation. |
+| EDA | PASS | Ten charts and aggregates regenerated from training split only. |
+| Contract / mock / tests | PASS | Contract and 300-row synthetic mock validated; 13 pytest passed, 0 skipped. |
+| Raw checksums | PASS | Train `fd7139200dbfcbed0b6742bbe05a4f1abce532c4fef20918228a651647a3e75d`; test `12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0`. |
 
-## Git LFS status
+## Split policy change
 
-The two CSVs were introduced in commit `ff8baf41502b39fc8fa477f259e50ae0b8f84de6` (`Update data thô`). The commit is at local `toan` and `origin/toan`; `origin/main` does not contain it. `.gitattributes` currently applies Git LFS to every `*.csv`. `.gitignore` matches the raw files only for future untracked files; it does not untrack them. No CSV or Git history/index operation was changed in this task.
+Toan requested the switch to `nearest_row_count` on 2026-11-23. The former hash `70886bb39220a732c02d0fd1fe2568bdbcaee96d9e3434c73bd9477c02ebb255` is historical. Exactly one transaction (`408a69cd781df5546489ecb28a2007ea`, timestamp `2020-03-06T07:15:17`) moved from validation to train. Current counts are train 1,037,340 and validation 259,335; test is unchanged. All downstream split artifacts and EDA were regenerated.
 
-### Option A — stop tracking in a future commit, preserve history (recommended)
+## Git LFS and artifact location
 
-Remove the raw files from the current index in a new commit, keep the local copies, and narrow the LFS attribute rule to raw inputs only. This avoids rewriting commit IDs and is the least disruptive path. The old `toan` commit and LFS objects remain reachable, so this does **not** purge history or reduce existing LFS storage. When collaborators pull the deletion commit, Git may remove their checked-out raw paths; they should back up or relocate the local CSVs first.
+The raw CSVs remain LFS-tracked in the repository history, with the checksums above. The `.gitattributes` rule is scoped to `data/raw/*.csv`; `.gitignore` excludes raw, processed, and split data. In this feature worktree, generated Parquet outputs are physically present under `data/processed/` and `data/splits/`, but ignored and untracked. Do not stage them. Their presence allows local integration tests and notebook execution; teammates cannot access them unless they recreate the pipeline or receive them through an approved data channel.
 
-### Option B — rewrite Git/LFS history
+A remote fetch previously returned `Repository not found`; remote branch freshness remains unverified. No history/index/LFS tracking changes were made.
 
-Coordinate a `git lfs migrate`/history cleanup, force-update remote branches, and ensure old LFS objects are eventually pruned by the hosting service. This can remove the old tracked objects from reachable history, but changes commit IDs, disrupts open clones/branches, requires every collaborator to coordinate/reclone or reset, and can affect other work on shared branches. This requires an explicit team-approved maintenance window and is not performed here.
+## Remaining handoff conditions
 
-## Required before Git handoff
-
-1. Choose Option A or B with the team.
-2. For Option A, confirm collaborators have backed up the local raw CSVs before pulling a commit that removes them from the repository tip.
-3. Apply and review the Git LFS remediation in a separate approved change; no Git history, staging, commit, push, or merge operations were performed here.
+1. Review the updated split hash and one-record membership change with downstream owners before model outputs are compared across split versions.
+2. Provide or restore `TOAN_SPRINT1_REMAINING_WORK.md`; it is absent and was not read or audited.
+3. Restore remote read access and verify GitHub branch state before any publication action.
+4. Share/recreate ignored Parquet artifacts for downstream use; do not add raw or processed transaction datasets to a code review commit.

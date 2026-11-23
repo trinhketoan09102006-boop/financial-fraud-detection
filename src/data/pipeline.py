@@ -15,7 +15,7 @@ from .preprocess import preprocess
 from .split import create_splits
 
 
-def run(stage: str, force: bool = False, mock_rows_per_split: int = 100) -> dict:
+def run(stage: str, force: bool = False, mock_rows_per_split: int = 100, cutoff_policy: str = "nearest_row_count") -> dict:
     started = time.perf_counter()
     results = {}
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", force=True)
@@ -42,7 +42,7 @@ def run(stage: str, force: bool = False, mock_rows_per_split: int = 100) -> dict
                 frame = preprocess(force=force, validate_audit=False)
                 outcome = {"rows": len(frame), "columns": len(frame.columns)}
             elif name == "split":
-                outcome = create_splits(force=force, validate_audit=False)
+                outcome = create_splits(force=force, validate_audit=False, cutoff_policy=cutoff_policy)
             elif name == "eda":
                 outcome = run_eda(validate_audit=False)
             else:
@@ -58,9 +58,10 @@ def main() -> None:
     parser.add_argument("--stage", choices=["audit", "preprocess", "split", "eda", "all", "mock"], required=True)
     parser.add_argument("--force", action="store_true", help="Replace existing processed/split artifacts intentionally.")
     parser.add_argument("--mock-rows-per-split", type=int, default=100)
+    parser.add_argument("--cutoff-policy", choices=["legacy", "nearest_row_count"], default="nearest_row_count")
     args = parser.parse_args()
     try:
-        print(json.dumps(run(args.stage, args.force, args.mock_rows_per_split), indent=2, default=str))
+        print(json.dumps(run(args.stage, args.force, args.mock_rows_per_split, args.cutoff_policy), indent=2, default=str))
     except Exception as exc:
         logging.exception("Pipeline stopped: %s", exc)
         raise SystemExit(1) from exc
