@@ -1,0 +1,13 @@
+{
+  "rows_joined": 1852394,
+  "trans_num_one_to_one": true,
+  "cc_num_preserved_exactly": true,
+  "artifact_sha256": {
+    "data/processed/transactions.parquet": "60efdcdbb59aa1e503fc8b2ddb023d3d0bc84d611d176ec8b71f7713ecb66e30",
+    "data/splits/train.parquet": "aefcebfe4a8c07bd2ea9eaef3d65edc493244c3dd6dcaf4f5eb694aa9004bd55",
+    "data/splits/validation.parquet": "9feecd921fdaa08c876d8ea902af1072483ad45c68cb8152bddb65a92b56d4c7",
+    "data/splits/test.parquet": "43f3b72e486d9b544fc4963f61d4b8d7ac4531507f81007f1ba554f16f854570",
+    "data/splits/split_manifest.parquet": "b8559100aaa195fe5ffe80d1a2c15360578c5ad456a7cdba5facd7eaaa0848bc",
+    "data/splits/split_metadata.json": "468b129fecf0dbff1557b1ac86e157639546427d3bc9df10f4084708dd0b4d3f"
+  }
+}

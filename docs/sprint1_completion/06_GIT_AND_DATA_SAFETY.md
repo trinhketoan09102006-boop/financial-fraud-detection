@@ -2,18 +2,19 @@
 
 ## Repository state
 
-- Original project worktree: branch `toan`, HEAD `af693e0274ddfb9d7f4b57b13f6872b95680bfe9`, preserved separately.
-- Work was isolated in branch `sprint1-completion`, based on local `main` at the same baseline. Changes remain uncommitted for review.
-- No commit, push, merge, PR, reset, clean, stash, history rewrite, or branch deletion was performed.
-- Configured remote: `https://github.com/trinhketoan09102006-boop/financial-fraud-detection.git`.
-- Safe fetch returned `Repository not found`; GitHub state and remote branch freshness are unverified.
+- Repository: `financial-fraud-detection`; branch `toan`.
+- HEAD: `0515b4b3c87431e1dae39c50f012b211385442d6`.
+- Worktree was clean before this task. Changes from this task remain uncommitted for review.
+- Configured origin URL matches the project repository. Cached refs at audit: `origin/toan=0515b4b3c87431e1dae39c50f012b211385442d6`, `origin/main=9648beb5ef87f1b1daf8feb5af4ac852fdd0e524`. No fetch was performed, so server freshness is unknown.
+- A pre-existing linked worktree registration is marked `prunable`; it was not altered.
+- No commit, push, merge, PR, fetch, reset, clean, stash, history rewrite, branch creation, or branch deletion was performed.
 
-## LFS, ignore rules, and data
+## LFS and ignore rules
 
-- Raw SHA-256 values before and after regeneration are unchanged: train `fd7139200dbfcbed0b6742bbe05a4f1abce532c4fef20918228a651647a3e75d`; test `12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0`.
-- Both raw CSVs remain Git LFS tracked. `.gitattributes` scope is `data/raw/*.csv`; mock and EDA summary CSVs are not covered.
-- `.gitignore` excludes raw, processed, split, and artifact data while preserving `.gitkeep` files.
-- Current generated Parquet files physically exist in `data/processed/` and `data/splits/`. They are ignored and untracked; only `.gitkeep` files in those folders are Git-tracked. Do not stage the Parquet files.
-- Current split metadata and EDA outputs use `nearest_row_count`, hash `aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8`.
+- `.gitattributes` applies LFS to `data/raw/*.csv`; mock CSV is not LFS-filtered.
+- `git lfs ls-files` reports the two raw CSVs. `git lfs fsck` passed.
+- Raw SHA-256 values before and after both full pipeline runs are unchanged: train `fd7139200dbfcbed0b6742bbe05a4f1abce532c4fef20918228a651647a3e75d`; test `12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0`.
+- `.gitignore` excludes `data/raw`, `data/processed`, and `data/splits` contents while preserving `.gitkeep` files. Generated Parquet files and the reproducibility snapshots are ignored and not Git-tracked.
+- `git ls-files data/processed data/splits` contains only `.gitkeep` files.
 
-These are local verification artifacts, not committed/shared deliverables. They can be regenerated with `python -m src.data.pipeline --stage all` when the raw inputs are available. No raw file, Git LFS tracking rule, or Git history was modified.
+No raw file, LFS tracking rule, remote ref, or Git history was modified.
