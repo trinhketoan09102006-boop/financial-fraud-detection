@@ -52,4 +52,6 @@ def test_full_pipeline_artifacts_preserve_rows_time_contract_and_hashes():
     assert event_splits.groupby("timestamp", observed=True)["split"].nunique().max() == 1
     metadata = json.loads((SPLITS / "split_metadata.json").read_text(encoding="utf-8"))
     assert stable_split_hash(manifest) == metadata["split_hash"]
-    assert metadata["split_hash"] == "70886bb39220a732c02d0fd1fe2568bdbcaee96d9e3434c73bd9477c02ebb255"
+    assert metadata["split_hash"] == "aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8"
+    assert metadata["cutoff_policy"] == "nearest_row_count"
+    assert metadata["rows"] == {"train": 1_037_340, "validation": 259_335, "test": 555_719}
