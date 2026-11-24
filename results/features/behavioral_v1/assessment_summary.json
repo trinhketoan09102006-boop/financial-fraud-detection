@@ -1,0 +1,118 @@
+{
+  "checks": {
+    "feature_version": true,
+    "feature_order": true,
+    "split_hash": true,
+    "manifest_unique": true,
+    "input_hash": true,
+    "train_checksum": true,
+    "train_schema": true,
+    "train_ids": true,
+    "validation_checksum": true,
+    "validation_schema": true,
+    "validation_ids": true,
+    "test_checksum": true,
+    "test_schema": true,
+    "test_ids": true,
+    "source_amount_positive": true,
+    "source_categories_nonnull": true
+  },
+  "invariants": {
+    "train": {
+      "count_order": 0,
+      "negative_counts": 0,
+      "negative_mean": 0,
+      "negative_std": 0,
+      "negative_ratio": 0,
+      "nonpositive_recency": 0,
+      "invalid_hour": 0,
+      "invalid_novelty": 0
+    },
+    "validation": {
+      "count_order": 0,
+      "negative_counts": 0,
+      "negative_mean": 0,
+      "negative_std": 0,
+      "negative_ratio": 0,
+      "nonpositive_recency": 0,
+      "invalid_hour": 0,
+      "invalid_novelty": 0
+    },
+    "test": {
+      "count_order": 0,
+      "negative_counts": 0,
+      "negative_mean": 0,
+      "negative_std": 0,
+      "negative_ratio": 0,
+      "nonpositive_recency": 0,
+      "invalid_hour": 0,
+      "invalid_novelty": 0
+    },
+    "cold": {
+      "cards": 999,
+      "rows": 999,
+      "violations": 0,
+      "missing_evidence": {
+        "hist_amt_mean": {
+          "missing": 999,
+          "cold_missing": 999,
+          "noncold_missing": 0,
+          "cold_nonmissing": 0
+        },
+        "hist_amt_std": {
+          "missing": 999,
+          "cold_missing": 999,
+          "noncold_missing": 0,
+          "cold_nonmissing": 0
+        },
+        "amt_ratio": {
+          "missing": 999,
+          "cold_missing": 999,
+          "noncold_missing": 0,
+          "cold_nonmissing": 0
+        },
+        "txn_recency": {
+          "missing": 999,
+          "cold_missing": 999,
+          "noncold_missing": 0,
+          "cold_nonmissing": 0
+        },
+        "hour_deviation": {
+          "missing": 999,
+          "cold_missing": 999,
+          "noncold_missing": 0,
+          "cold_nonmissing": 0
+        }
+      }
+    },
+    "ties": {
+      "groups": 44,
+      "rows": 88,
+      "violations_by_feature": {
+        "txn_count_1h": 0,
+        "txn_count_24h": 0,
+        "txn_count_7d": 0,
+        "hist_amt_mean": 0,
+        "hist_amt_std": 0,
+        "txn_recency": 0,
+        "hour_deviation": 0
+      }
+    }
+  },
+  "invariants_pass": true,
+  "hashes": {
+    "processed": "111d9d7e3d8c959728aafd3787701595285acbdf9c807433f5b718dcef637626",
+    "manifest": "86d8a6e44e01464a82540ba07ff0a1da8e1a44045c61a94436351f36f987fe96",
+    "metadata": "4fa810a1d2452ed3f5dbfdc0d01cf666b69e1c4a00939a514d66b25c4bc3fd11",
+    "train": "5184322dc4b88f73fa59a091406d34b746c253c93533f48427c2589c818d32b1",
+    "validation": "cb34d6e44f194eb927c460e4da78a349536a64b48a93271182093a69e12c8b63",
+    "test": "7bd3d66ac276e0837d94ad2596b9beb450606a2b809b1ed45d13c13c150e3093"
+  },
+  "runtime_seconds": 79.76,
+  "peak_working_set_bytes": 1668427776,
+  "python": "3.14.4",
+  "pandas": "3.1.1",
+  "pyarrow": "26.0.1",
+  "charts": 5,
+  "split_hash": "aabb7d14153b48bc353dc84d25b624cce1b74f321edb74edfc6138ba08faf5b8"
+}
