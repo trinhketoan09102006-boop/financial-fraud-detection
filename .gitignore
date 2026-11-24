@@ -257,3 +257,5 @@ kaggle.json
 # IDE
 .vscode/
 .idea/
+# Generated behavioral feature datasets
+/data/features/behavioral_v1/*.parquet
