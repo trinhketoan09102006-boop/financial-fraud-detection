@@ -2,7 +2,8 @@ import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-from src.data.preprocess import ARROW_STRING_COLUMNS, _to_contract_arrow_table, normalize_frame
+from src.data.arrow_schema import dataframe_to_arrow_table, load_contract_arrow_schema
+from src.data.preprocess import normalize_frame
 
 
 def test_normalize_frame_preserves_ids_and_target_and_removes_direct_identity():
@@ -59,17 +60,20 @@ def test_normalized_parquet_uses_contract_arrow_string_even_from_large_string_ba
     normalized = normalize_frame(raw, "fraudTrain")
     # Exercise the wider Arrow text type regardless of how this environment's
     # pandas string dtype is currently mapped by PyArrow.
+    contract_schema = load_contract_arrow_schema()
     arrow = pa.Table.from_pandas(normalized, preserve_index=False)
-    for name in ARROW_STRING_COLUMNS:
+    for field in contract_schema:
+        if not pa.types.is_string(field.type):
+            continue
+        name = field.name
         index = arrow.schema.get_field_index(name)
         arrow = arrow.set_column(index, name, arrow.column(index).cast(pa.large_string()))
     wide_string_frame = arrow.to_pandas()
 
     output = tmp_path / "normalized.parquet"
-    pq.write_table(_to_contract_arrow_table(wide_string_frame), output)
+    pq.write_table(dataframe_to_arrow_table(wide_string_frame, strict=True), output)
     schema = pq.read_schema(output)
-    for name in ARROW_STRING_COLUMNS:
-        assert schema.field(name).type == pa.string(), (name, schema.field(name).type)
+    assert schema.equals(contract_schema, check_metadata=False)
 
 
 def test_canonical_timestamp_is_parsed_from_trans_date_and_not_shifted():

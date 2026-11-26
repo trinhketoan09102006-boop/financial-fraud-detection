@@ -44,7 +44,7 @@ The split is temporal, not random. For future behavioral features, only same-car
 
 ## 11. Test results
 
-`python -m pytest -q -rs` after regenerating the `nearest_row_count` artifacts: **14 passed, 0 skipped**, with one third-party pytest deprecation warning. Python compilation and `pip check` pass. Tests cover audit aggregate privacy and stop conditions, canonical timestamp normalization, temporal splitting, feature exclusions, mock data, and full-data integration including source checksums, stale-time reconstruction, row preservation, split boundaries/hash, and exact Arrow string schema regression.
+`python -m pytest -q -rs` after regenerating the `nearest_row_count` artifacts: **18 passed, 0 skipped**, with one third-party pytest deprecation warning. Python compilation and `pip check` pass. Tests cover audit aggregate privacy and stop conditions, canonical timestamp normalization, temporal splitting, feature exclusions, mock data, and full-data integration including source checksums, stale-time reconstruction, row preservation, split boundaries/hash, and exact Arrow string schema regression.
 
 ## 12–15. Guidance for Trung, Tú, Tùng, and Khoa
 

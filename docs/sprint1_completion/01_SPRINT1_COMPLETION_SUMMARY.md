@@ -2,7 +2,7 @@
 
 Date: 2026-11-23
 Branch: `toan`
-HEAD: `0515b4b3c87431e1dae39c50f012b211385442d6`
+HEAD at cross-version compatibility review: `ae0294f7890905101374f9f1f2a030703cffa71e` (working-tree changes are not committed).
 
 | Item | Status | Evidence |
 |---|---|---|
@@ -10,7 +10,7 @@ HEAD: `0515b4b3c87431e1dae39c50f012b211385442d6`
 | T02 Full pipeline | PASS | Two full runs exited 0; 34 outputs identical. |
 | T03 EDA notebook | PASS | nbconvert exit 0, 2/2 cells, no cell errors; one non-fatal Windows ZeroMQ warning. |
 | T04 Schema/timestamp | PASS | 25/25 fields match contract; exact Arrow `string` text; timestamps `timestamp[ns]`, timezone-naive. |
-| T05 Tests | PASS | 14 passed, 0 failed, 0 skipped; integration ran on full artifacts. |
+| T05 Tests | PASS | 18 passed, 0 failed, 0 skipped in both supported validation environments; integration ran on full artifacts. |
 | T06 Git/LFS safety | PASS | Raw checksums unchanged; LFS fsck passed; no tracking/history/remote changes. |
 | T07 Remote/handoff | CONDITIONAL | Cached refs are recorded, but not refreshed; generated Parquet files are local ignored artifacts. |
 
