@@ -1,6 +1,20 @@
 import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
 
-from src.data.split import choose_timestamp_cutoff, create_splits, stable_split_hash
+from src.data.split import _write_parquet, choose_timestamp_cutoff, create_splits, stable_split_hash
+
+
+def test_split_parquet_writer_downcasts_large_string_to_contract_string(tmp_path):
+    frame = pd.DataFrame({
+        "trans_num": pd.Series(["txn-1", "txn-2"], dtype=pd.ArrowDtype(pa.large_string())),
+        "split": pd.Series(["train", "validation"], dtype=pd.ArrowDtype(pa.large_string())),
+    })
+    output = tmp_path / "split_manifest.parquet"
+    _write_parquet(frame, output, force=False)
+    schema = pq.read_schema(output)
+    assert schema.field("trans_num").type == pa.string()
+    assert schema.field("split").type == pa.string()
 
 
 def test_temporal_split_groups_timestamps_and_hash_is_stable(tmp_path):

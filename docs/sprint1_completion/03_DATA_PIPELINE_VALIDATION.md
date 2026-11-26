@@ -35,6 +35,6 @@ Raw checksums remained unchanged: train `fd7139200dbfcbed0b6742bbe05a4f1abce532c
 
 ## Tests and notebook
 
-The final full suite result is **14 passed, 0 failed, 0 skipped**, exit code 0. The sole warning is the installed AnyIO plugin's third-party `PytestRemovedIn10Warning`. Full log: `10_pytest_final.txt`.
+The initial Sprint 1 full suite result was 14 passed, 0 failed, 0 skipped (log: `10_pytest_final.txt`). After the cross-version Arrow schema regression tests were added, the final suite passed with **18 passed, 0 failed, 0 skipped** in both supported environments (logs: `11_full_suite_py313_final.txt` and `11_full_suite_py311_final.txt`). Environment A emits one third-party AnyIO `PytestRemovedIn10Warning`; Environment B emits no warnings.
 
 The notebook was executed separately after the pipeline. It exited 0, completed 2/2 code cells without cell errors, and used the new training split. An executed copy is under ignored `data/processed/.sprint1_backup_20261123/notebook_execution/`; the source notebook was not overwritten. The only notebook warning was a non-fatal ZeroMQ Proactor event-loop compatibility warning. See `10_notebook_execution.txt` and `10_notebook_validation.json`.

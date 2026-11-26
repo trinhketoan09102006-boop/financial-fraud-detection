@@ -2,12 +2,10 @@
 
 ## Repository state
 
-- Repository: `financial-fraud-detection`; branch `toan`.
-- HEAD: `0515b4b3c87431e1dae39c50f012b211385442d6`.
-- Worktree was clean before this task. Changes from this task remain uncommitted for review.
-- Configured origin URL matches the project repository. Cached refs at audit: `origin/toan=0515b4b3c87431e1dae39c50f012b211385442d6`, `origin/main=9648beb5ef87f1b1daf8feb5af4ac852fdd0e524`. No fetch was performed, so server freshness is unknown.
+- Historical Sprint 1 audit snapshot: branch `toan`, HEAD `0515b4b3c87431e1dae39c50f012b211385442d6`; cached refs at that audit were `origin/toan=0515b4b3c87431e1dae39c50f012b211385442d6` and `origin/main=9648beb5ef87f1b1daf8feb5af4ac852fdd0e524`. No fetch was performed, so those remote refs were not verified as current.
+- Current cross-version schema review: branch remains `toan`, HEAD is `ae0294f7890905101374f9f1f2a030703cffa71e`. Compatibility fix and report changes are in the uncommitted working tree; there are no staged files.
 - A pre-existing linked worktree registration is marked `prunable`; it was not altered.
-- No commit, push, merge, PR, fetch, reset, clean, stash, history rewrite, branch creation, or branch deletion was performed.
+- No commit, push, merge, PR, fetch, reset, clean, stash, history rewrite, branch creation, or branch deletion was performed during this review.
 
 ## LFS and ignore rules
 
