@@ -259,3 +259,5 @@ kaggle.json
 .idea/
 # Generated behavioral feature datasets
 /data/features/behavioral_v1/*.parquet
+/results/baseline/mock/
+/results/baseline/sparkov/*_predictions.csv
