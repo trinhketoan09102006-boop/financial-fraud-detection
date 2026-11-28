@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
 import pytest
 import yaml
 
@@ -28,6 +30,7 @@ def test_full_pipeline_artifacts_preserve_rows_time_contract_and_hashes():
         assert info["unix_timestamp_decreases"] == 0
 
     data = pd.read_parquet(PROCESSED)
+    normalized_arrow_schema = pq.read_schema(PROCESSED)
     assert len(data) == 1_852_394
     assert data["trans_num"].notna().all() and data["trans_num"].is_unique
     assert "timestamp" in data and "unix_time" not in data
@@ -35,6 +38,9 @@ def test_full_pipeline_artifacts_preserve_rows_time_contract_and_hashes():
     assert data["is_fraud"].isin([0, 1]).all()
 
     schema = yaml.safe_load((ROOT / "configs" / "data_schema.yaml").read_text(encoding="utf-8"))
+    for name, spec in schema["fields"].items():
+        if spec["type"] == "string":
+            assert normalized_arrow_schema.field(name).type == pa.string(), (name, normalized_arrow_schema.field(name).type)
     features = yaml.safe_load((ROOT / "configs" / "base_features.yaml").read_text(encoding="utf-8"))
     assert schema["canonical_time_source"] == "trans_date_trans_time"
     selected = set(features["features"]["numeric"] + features["features"]["categorical"])
@@ -47,6 +53,13 @@ def test_full_pipeline_artifacts_preserve_rows_time_contract_and_hashes():
     assert split_frames["train"].timestamp.max() < split_frames["validation"].timestamp.min()
     assert split_frames["validation"].timestamp.max() < split_frames["test"].timestamp.min()
     manifest = pd.read_parquet(SPLITS / "split_manifest.parquet")
+    manifest_schema = pq.read_schema(SPLITS / "split_manifest.parquet")
+    assert manifest_schema.field("trans_num").type == pa.string()
+    assert manifest_schema.field("split").type == pa.string()
+    for name in ("train", "validation", "test"):
+        split_schema = pq.read_schema(SPLITS / f"{name}.parquet")
+        for field in ("trans_num", "cc_num", "merchant", "category", "gender", "city", "state", "zip", "job", "source_dataset"):
+            assert split_schema.field(field).type == pa.string(), (name, field, split_schema.field(field).type)
     assert len(manifest) == len(data) and manifest["trans_num"].is_unique
     event_splits = data[["trans_num", "timestamp"]].merge(manifest, on="trans_num", validate="one_to_one")
     assert event_splits.groupby("timestamp", observed=True)["split"].nunique().max() == 1

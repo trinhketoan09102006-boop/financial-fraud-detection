@@ -41,8 +41,8 @@ def generate_mock(output_dir: Path | None = None, rows_per_split: int = 100, see
                 "city_pop": None if split == "validation" and i == 8 else 100_000,
                 "dob": pd.Timestamp("1980-01-01") + pd.Timedelta(days=i % 1000), "job": f"job_{i % 10}",
                 "merch_lat": 37.8, "merch_long": -122.5,
-                "is_fraud": fraud, "hour": ts.hour, "day_of_week": ts.dayofweek, "month": ts.month,
-                "is_weekend": int(ts.dayofweek >= 5), "age_at_transaction": (ts - pd.Timestamp("1980-01-01")).days / 365.2425,
+                "is_fraud": fraud, "hour": ts.hour, "day_of_week": ts.day_of_week, "month": ts.month,
+                "is_weekend": int(ts.day_of_week >= 5), "age_at_transaction": (ts - pd.Timestamp("1980-01-01")).days / 365.2425,
                 "merchant_distance_km": 14.17,
                 "source_dataset": "fraudTest" if split == "test" else "fraudTrain",
             })

@@ -1,39 +1,36 @@
 # Final Arrow schema fix
 
-## Finding and initial evidence
+## Reported failure and reproduction
 
-The previously supplied validation summary stated `12 PASS / 1 FAIL` and that integration passed, but it did not include the failing test name, traceback, or the Parquet artifact that failed. The required `TOAN_SPRINT1_FINAL_FIX_HANDOFF.md` was not present, so it was not read or audited.
+Tu reported `test_mock_data_is_synthetic_temporal_and_covers_each_split` failing for `trans_num`, expecting Arrow `string` but receiving `large_string` on Python 3.11.9 / pandas 3.1.1 / PyArrow 26.0.1.
 
-At the start of this work, the `toan` branch had no processed or split Parquet files. The fresh baseline suite therefore produced `12 passed, 1 skipped, 0 failed`; the skipped test was the full-data integration test because `data/processed/transactions.parquet` did not exist. That output is saved in `09_initial_pytest_baseline.txt`.
+The failure was reproduced with the actual mock generator in that environment:
 
-The backend mismatch was reproduced independently with an Arrow-backed `large_string` field and the contract assertion for `string`. The captured traceback is in `09_arrow_schema_failure_reproduction.txt` and shows `trans_num: expected string, got large_string`. This reproduces the reported failure mode, but it is not claimed to be the missing historical test/traceback.
+- generator DataFrame dtype: pandas `string`
+- direct `pa.Table.from_pandas(data, preserve_index=False)`: `trans_num` is `large_string`
+- contract conversion: `trans_num` is `string`
+- Parquet schema after readback: `trans_num` is `string`
+
+The earlier test asserted the backend's direct inference rather than serializing through the declared contract. The mock generator itself returns correct identifiers and writes CSV; it does not create Arrow/Parquet output. Separately, full-data staging showed that the split writer also inferred `large_string` on the new environment. That was a real serialization defect and is fixed at the shared writer boundary.
+
+Logs: `11_root_cause_reproduction_py311.txt`, `11_root_cause_reproduction_py313.txt`, and `11_mock_test_py311_verbose.txt`.
 
 ## Root cause and fix
 
-Pandas-to-PyArrow inference can preserve a wide `large_string` type for pandas text columns. The old Parquet write delegated type choice to `DataFrame.to_parquet`, so output could depend on the input string backend. The contract in `configs/data_schema.yaml` requires Arrow `string` for every field declared `string`.
+Pandas 3.1.1 with PyArrow 26.0.1 maps pandas `StringDtype` to Arrow `large_string` during uninstructed DataFrame conversion. The prior string cast in preprocessing used a hard-coded column list, and the test bypassed that writer. The split writer also called `DataFrame.to_parquet` without an explicit schema conversion.
 
-`src/data/preprocess.py` now converts the normalized frame to an Arrow table, explicitly casts every contract text field (`trans_num`, `cc_num`, `merchant`, `category`, `gender`, `city`, `state`, `zip`, `job`, and `source_dataset`) to `pa.string()`, then writes that table to Parquet. The schema contract was not changed, and no identifier, transaction, or label values are modified.
+Added `src/data/arrow_schema.py`. `load_contract_arrow_schema()` reads field types and nullability from `configs/data_schema.yaml`. `dataframe_to_arrow_table()` applies that schema to normalized and mock frames; in non-strict mode it applies contract types to known fields and safely narrows additional `large_string` columns (including the split label) to `string`. It does not coerce unrelated columns to strings.
 
-## Schema before and after
-
-| Case | Arrow type | Result |
-|---|---|---|
-| Forced wide-string regression input before normalization | `large_string` | Contract violation; captured assertion fails. |
-| Current Parquet output for all ten contract text fields | `string` | PASS. |
-| `timestamp`, `dob` | `timestamp[ns]`, timezone `null` | PASS. |
-| Full normalized table | All 25 fields exactly match `configs/data_schema.yaml` | PASS; zero mismatches. |
-
-The complete comparison is saved in `10_pipeline_validation.json`.
+Preprocessing and split serialization now share this helper. The data contract is unchanged. The mock test creates a contract Arrow table, writes Parquet, then validates the schema and values after reading it back.
 
 ## Regression coverage
 
-`tests/test_data_preprocessing.py` now forces each contract text field through `large_string`, writes through the contract Arrow-table helper, reads the Parquet schema back, and asserts exact `string` types. The existing timestamp precision and normalization tests remain in place. The full suite passed after the fix: 14 passed, 0 failed, 0 skipped.
+Regression tests exercise `object`, pandas `string`, and Arrow-backed `large_string` text inputs. They check the in-memory Arrow table, every field in the Parquet round-trip, and preservation of text values including `trans_num` and `cc_num`. Split tests cover `trans_num` and the manifest's `split` field. Full-data integration checks string types in normalized, split, and manifest Parquets.
 
-## Files changed for this fix
+## Cross-version result
 
-- `src/data/preprocess.py`
-- `tests/test_data_preprocessing.py`
+- Python 3.11.9 / pandas 3.1.1 / PyArrow 26.0.1: target test passes; full suite 18 passed, no skips.
+- Python 3.13.7 / pandas 2.2.3 / PyArrow 22.0.0: target test passes; full suite 18 passed, no skips.
+- Full normalized/split schema remains consistent with the YAML contract under both environments.
 
-## Limitations
-
-The missing historical failing test could not be named from the supplied evidence. The local reproduction confirms the reported `large_string` failure mode. The full-data output was rebuilt and all current contract field types were verified under Python 3.13.7, pandas 2.2.3, and PyArrow 22.0.0.
+The split policy and official hash were not changed. See `11_CROSS_VERSION_ARROW_COMPATIBILITY.md` for exact commands, comparisons, and remaining numeric-parser caveat.

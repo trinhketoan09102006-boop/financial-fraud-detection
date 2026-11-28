@@ -8,7 +8,9 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import pyarrow.parquet as pq
 
+from .arrow_schema import dataframe_to_arrow_table
 from .audit import ROOT, run_audit, sha256_file
 
 
@@ -56,7 +58,8 @@ def _write_parquet(frame: pd.DataFrame, path: Path, force: bool) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_suffix(path.suffix + ".tmp")
     try:
-        frame.to_parquet(temp, index=False, compression="zstd")
+        table = dataframe_to_arrow_table(frame, strict=False)
+        pq.write_table(table, temp, compression="zstd")
         temp.replace(path)
     finally:
         temp.unlink(missing_ok=True)
